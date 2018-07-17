@@ -1,0 +1,50 @@
+<html>
+<head>
+    <script src="assets/js/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript" src="login-api.js"></script>
+    
+
+    <script id="itemlist">
+        //function leerComment()
+    </script>
+    
+</head>
+<title></title>
+<body>
+    <button id="btn">Mostrar</button>
+
+    <table id="table" style="width:100%">
+            <tr>
+              <th>Id</th>
+              <th>title</th> 
+              <th>body</th>
+            </tr>
+
+            
+    </table>
+
+
+<script>
+    window.onload =function(){
+    var token = window.localStorage.getItem("token");
+    LoginApi.post(token)
+    .then(
+    function hacerLista(data) {
+    
+
+        data.forEach(element => {
+            let info = " <tr> <td> " + element['id']
+            info+=  " </td> <td> " + element['title']
+            info+=  "</td> <td>  " + element['body'] + " </td> <tr>"
+
+            $("#table").append(info)
+             
+        });
+    })
+}
+</script>
+
+
+</body>
+</html>

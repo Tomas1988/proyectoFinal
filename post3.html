@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>Jquery Template Demo</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="login-api.js"></script>
+</head>
+  <body>
+ 
+    
+     <ul id=guest></ul>
+
+    <script type="text/javascript">
+    window.onload =function(){
+    var token = window.localStorage.getItem("token");
+    LoginApi.post(token)
+   var myTemplate = "<li>Name:${title}<br/>Body:${body}<br />";
+    $.template("contactLi", myTemplate);
+  $.tmpl( "contactLi", data ).appendTo( "#guests" );
+}
+
+
+
+    </script>
+  </body>
+</html>
