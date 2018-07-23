@@ -59,9 +59,9 @@ window.onload =function(){
 var token = window.localStorage.getItem("token");
 
 //if (token !== null) {
-  //validar que este activo
-  //window.location = "index.html";
-//}
+ // validar que este activo
+ //window.location = "index.html";
+//};
 
   $("#btnLogin").click(function(){
     login();

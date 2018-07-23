@@ -1,12 +1,12 @@
 <html>
   <head>
     <title>Jquery Template Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
     <script type="text/javascript" src="login-api.js"></script>
 
-    <link rel="stylesheet" href="assets/bootstrap.min.css">
-    <script src="assets/bootstrap.min.js"></script>
+    
 
 </head>
   <body>
@@ -15,15 +15,18 @@
     </div>
     
     <script id="itemList" type="text/x-jQuery-tmpl">
-
+    
      <div class="card">
             <div class="card-header">
-                    ${title}
+                    ${title} 
             </div>
+            <div class="form-group">
+                <a href="comment.html" id="comment" class="pull-right"> comentarios </a>
+                </div>
             <div class="card-body">
               <blockquote class="blockquote mb-0">
                 <p>${body}</p>
-                <footer class="blockquote-footer"> Usuario <cite title="Source Title">${userId}</cite></footer>
+                <footer class="blockquote-footer"> by: <cite title="Source Title">${userId}</cite></footer>
               </blockquote>
             </div>
           </div>
@@ -31,7 +34,20 @@
     </script>
     <script type="text/javascript">
     var token = window.localStorage.getItem("token");
-    LoginApi.post(token)
+    LoginApi.post(token);
+
+    
+    
+    //var token =response.token 
+    //window.localStorage.setItem("token", token);
+    //window.location= "index.html";
+    //TODO: Registrat el token en local storage
+    //TODO: Debemos redireccionar al index
+ 
+    
     </script>
+
+
+
   </body>
 </html>

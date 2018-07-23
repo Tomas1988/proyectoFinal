@@ -7,6 +7,25 @@ var PATH = "/login";
 var PATH_Register = "/register";
 var PATH_logout = "/logout";
 var PATH_post ="/post";
+var PATH_users="/users";
+
+var usuarios
+
+var token = window.localStorage.getItem("token");
+
+$.ajax({  
+	method: 'GET',
+	url: baseUrl+PATH_users,
+   // Authorization: 'Bearer '+ token,
+	headers: {'Authorization' : 'Bearer '+ token},   //Estos son los datos convertidos a formato json que seran enviados
+	success: function (data) {        //Aqio entra cuando la peticion se hizo bie
+	   usuarios  = data
+	},
+	error: function(error){
+	reject(error);
+	}
+   
+});
 
 return {
 
@@ -102,11 +121,17 @@ logout: function(token){
 			});
 
 },
-post: function(token){
+post: function(body, id, title, userId){
 
     return new Promise(function(resolve, reject){
-	
-
+		var ld = { 
+		 
+			body: body,
+			id : id,
+			title: title,
+			userId: userId
+	}
+          
  $.ajax({  
 			 method: 'GET',
 			 url: baseUrl+PATH_post,
@@ -116,7 +141,26 @@ post: function(token){
 			     //Esta es la url donde ira la informacion
 				 //Que verbose http usaremos
 			 //contentType: 'application/json; charset=utf-8',    //El tipo de datos que retornada la peticion..
+			 //data: JSON.stringify(ld),
 			 success: function (data) {        //Aqio entra cuando la peticion se hizo bie
+				var _data = data
+
+				for (let index = 0; index < _data.length; index++) {
+					for (let indexc = 0; indexc < usuarios.length; indexc++) {
+						if (_data[index]['userId'] == usuarios[indexc]['id']){
+							_data[index]['userId']= usuarios[indexc]['email']
+						}
+					}				
+				}
+				
+
+				console.log(_data[0]['userId'])
+				console.log(usuarios[0]['id'])
+
+				console.log(typeof(_data))
+				console.log(typeof(usuarios))
+
+
 				$('#itemList').tmpl(data).appendTo('#content');
 			 },
 			 error: function(error){
@@ -128,6 +172,40 @@ post: function(token){
 
 			});
 
-}
+},
+
+users: function(email, id, name, ){
+
+    return new Promise(function(resolve, reject){
+		var ld1= { 
+		 
+			email: email,
+			id : id,
+			name: name,
+			
+	}
+
+ $.ajax({  
+			 method: 'GET',
+			 url: baseUrl+PATH_users,
+			// Authorization: 'Bearer '+ token,
+			 headers: {'Authorization' : 'Bearer '+ token},   //Estos son los datos convertidos a formato json que seran enviados
+			 //dataType: 'application/json',   //Tipo de datos que se va a mandar
+			     //Esta es la url donde ira la informacion
+				 //Que verbose http usaremos
+			 //contentType: 'application/json; charset=utf-8',    //El tipo de datos que retornada la peticion..
+			 data1: JSON.stringify(ld1),
+			 success: function (data) {        //Aqio entra cuando la peticion se hizo bie
+				resolve(data)
+			 },
+			 error: function(error){
+			 reject(error);
+			 }
+			
+			 });
+			
+
+			});
+		}
 }
 })();
