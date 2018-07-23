@@ -8,6 +8,7 @@ var PATH_Register = "/register";
 var PATH_logout = "/logout";
 var PATH_post ="/post";
 var PATH_users="/users";
+var PATH_postComment="/post/postId/comment"
 
 var usuarios
 
@@ -174,38 +175,28 @@ post: function(body, id, title, userId){
 
 },
 
-users: function(email, id, name, ){
-
-    return new Promise(function(resolve, reject){
-		var ld1= { 
-		 
-			email: email,
-			id : id,
-			name: name,
-			
-	}
-
- $.ajax({  
-			 method: 'GET',
-			 url: baseUrl+PATH_users,
-			// Authorization: 'Bearer '+ token,
-			 headers: {'Authorization' : 'Bearer '+ token},   //Estos son los datos convertidos a formato json que seran enviados
-			 //dataType: 'application/json',   //Tipo de datos que se va a mandar
-			     //Esta es la url donde ira la informacion
-				 //Que verbose http usaremos
-			 //contentType: 'application/json; charset=utf-8',    //El tipo de datos que retornada la peticion..
-			 data1: JSON.stringify(ld1),
-			 success: function (data) {        //Aqio entra cuando la peticion se hizo bie
-				resolve(data)
-			 },
-			 error: function(error){
-			 reject(error);
-			 }
-			
-			 });
-			
-
-			});
+post_comment: function(token,post){
+		$.ajax({  
+					method: 'GET',
+					url: baseUrl+"/post/"+post+"/comment",
+					// Authorization: 'Bearer '+ token,
+					headers: {'Authorization' : 'Bearer '+ token},   //Estos son los datos convertidos a formato json que seran enviados
+					//dataType: 'application/json',   //Tipo de datos que se va a mandar
+						//Esta es la url donde ira la informacion
+						//Que verbose http usaremos
+					//contentType: 'application/json; charset=utf-8',    //El tipo de datos que retornada la peticion..
+					success: function (data) {        //Aqio entra cuando la peticion se hizo bie
+						//resolve(data)
+						console.log(data)
+						return data
+					},
+					error: function(error){
+					//sreject(error);
+						console.log(error)
+					}
+					
+					});
+					
 		}
 }
 })();

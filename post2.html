@@ -11,7 +11,9 @@
 </head>
   <body>
     <div class="container">
-            <div id="content"></div>
+    <div id="content">
+      
+    </div>
     </div>
     
     <script id="itemList" type="text/x-jQuery-tmpl">
@@ -21,7 +23,8 @@
                     ${title} 
             </div>
             <div class="form-group">
-                <a href="comment.html" id="comment" class="pull-right"> comentarios </a>
+              <input  type="hidden" value="${id}">
+                <a href="comment.html" onclick= "setPostId(${id})" id="comment" class="pull-right"> comentarios </a>
                 </div>
             <div class="card-body">
               <blockquote class="blockquote mb-0">
@@ -35,7 +38,7 @@
     <script type="text/javascript">
     var token = window.localStorage.getItem("token");
     LoginApi.post(token);
-
+    
     
     
     //var token =response.token 
@@ -43,6 +46,13 @@
     //window.location= "index.html";
     //TODO: Registrat el token en local storage
     //TODO: Debemos redireccionar al index
+
+
+
+    function setPostId(id){
+      window.localStorage.setItem('idPost',id)
+      console.log(id)
+    }
  
     
     </script>
