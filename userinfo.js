@@ -1,3 +1,20 @@
+var root = 'http://localhost:8080';
+let idusuario = localStorage.getItem('idusuario')
+var token = localStorage.getItem('token');
+$.ajax({
+    url: root + '/users/'+idusuario,
+    headers: {'Authorization' : 'Bearer '+ token},
+    method: 'GET'
+}).then(function(data) {
+        $('#usuario').val(data.name)
+        $('#correo').val(data.email)
+        document.getElementById('usuario').innerHTML = data.name
+        document.getElementById('correo').innerHTML = data.email
+});	
+
+
+
+
 $(document).ready(function(){
 	//var root = 'https://jsonplaceholder.typicode.com';
 	var root = 'localhost:8080';

@@ -1,15 +1,47 @@
 <html>
   <head>
-    <title>Jquery Template Demo</title>
+    <title>Blog</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
     <script type="text/javascript" src="login-api.js"></script>
-
+	<script type="text/javascript" src="post.js"></script>
     
 
 </head>
   <body>
+		<div class="container">
+				<div class="row " style="margin-bottom: 5px;">
+					<h1 class="page-header titulo" align="center">Crear Post</h1>
+				</div>
+		
+				<div class="row">
+					<div class="col-sm-6" id="divformulario">
+						<form class="form-horizontal"> 
+							<div class="form-group">
+								<label for="titulo" class="col-sm-3 control-label blanco">Titulo</label>
+								<div class="col-sm-9">
+									<input  type="text" class="form-control" id="titulo" required placeholder="Titulo Del Post">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="comentario" class="col-sm-3 control-label blanco">Contenido</label>
+								<div class="col-sm-9">
+									<textarea required type="text" class="form-control" id="comentario" placeholder="Contenido Del Post"></textarea>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-sm-9">
+									<button type="submit" class="btn btn-primary" id="guardar">Guardar</button>
+								</div>
+							</div>
+						</form> 
+					</div>
+				</div>
+			</div>
+
     <div class="container">
     <div id="content">
       
@@ -19,22 +51,26 @@
     <script id="itemList" type="text/x-jQuery-tmpl">
     
      <div class="card">
-            <div class="card-header">
-                    ${title} 
-            </div>
+            <div class="card-header">				
+					<a href="comment.html" onclick= "setPostId(${id})" id="comment" class="pull-right"> ${title}  </a>
+            </div> <img onclick="setStar(${id})" style="max-width : 30px" src="https://cdn.icon-icons.com/icons2/1527/PNG/512/star_106651.png" > </img><h2 id="lbstar${id}"></h2>
             <div class="form-group">
               <input  type="hidden" value="${id}">
-                <a href="comment.html" onclick= "setPostId(${id})" id="comment" class="pull-right"> comentarios </a>
                 </div>
             <div class="card-body">
               <blockquote class="blockquote mb-0">
                 <p>${body}</p>
-                <footer class="blockquote-footer"> by: <cite title="Source Title">${userId}</cite></footer>
+                <a href="infousuario.html" onclick="setUser(${userId})"   class="pull-right"> By: ${username} (${email})</a>
+                <footer  class="blockquote-footer"> <cite href="usuarioinfo.hmtl" title="Source Title"></cite></footer>
               </blockquote>
             </div>
-          </div>
-     
-    </script>
+          </div> 
+
+	</script>
+	
+	
+
+
     <script type="text/javascript">
     var token = window.localStorage.getItem("token");
     LoginApi.post(token);
@@ -46,13 +82,32 @@
     //window.location= "index.html";
     //TODO: Registrat el token en local storage
     //TODO: Debemos redireccionar al index
-
+	var root = 'http://localhost:8080';
 
 
     function setPostId(id){
       window.localStorage.setItem('idPost',id)
       console.log(id)
     }
+
+    function setUser(id){
+		  localStorage.setItem('idusuario',id)
+    }
+
+   
+
+    function setStar(id){
+      let star = parseInt(localStorage.getItem('post'+id))
+      let valor = star+1
+      localStorage.setItem('post'+id,valor)
+      let he = '#lbstar'+id
+      console.log(he)
+      //var starl = document.getElementById(he);
+      //starl.innerHTML = valor
+      console.log(star)
+      $(he).val("adas")
+    }
+    
  
     
     </script>

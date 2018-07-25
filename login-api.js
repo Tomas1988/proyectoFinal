@@ -12,21 +12,23 @@ var PATH_postComment="/post/postId/comment"
 
 var usuarios
 
-var token = window.localStorage.getItem("token");
+try {
+	var token = window.localStorage.getItem("token");
 
-$.ajax({  
-	method: 'GET',
-	url: baseUrl+PATH_users,
-   // Authorization: 'Bearer '+ token,
-	headers: {'Authorization' : 'Bearer '+ token},   //Estos son los datos convertidos a formato json que seran enviados
-	success: function (data) {        //Aqio entra cuando la peticion se hizo bie
-	   usuarios  = data
-	},
-	error: function(error){
-	reject(error);
-	}
-   
-});
+	$.ajax({  
+		method: 'GET',
+		url: baseUrl+PATH_users,
+	// Authorization: 'Bearer '+ token,
+		headers: {'Authorization' : 'Bearer '+ token},   //Estos son los datos convertidos a formato json que seran enviados
+		success: function (data) {        //Aqio entra cuando la peticion se hizo bie
+		usuarios  = data
+		}
+	});
+} catch (error) {
+	//do nothing
+}
+
+
 
 return {
 
@@ -145,20 +147,34 @@ post: function(body, id, title, userId){
 			 //data: JSON.stringify(ld),
 			 success: function (data) {        //Aqio entra cuando la peticion se hizo bie
 				var _data = data
-
+                /*
 				for (let index = 0; index < _data.length; index++) {
 					for (let indexc = 0; indexc < usuarios.length; indexc++) {
 						if (_data[index]['userId'] == usuarios[indexc]['id']){
-							_data[index]['userId']= usuarios[indexc]['email']
+							_data[index]['username']= usuarios[indexc]['name']
+							_data[index]['email']= usuarios[indexc]['email']
 						}
+						localStorage.setItem('post'+_data[index]['id'],0)
+						_data[index]['star']= localStorage.getItem('post'+_data[index][id])
 					}				
 				}
-				
+				*/
+				data.forEach((v,i)=>{
 
-				console.log(_data[0]['userId'])
+				usuarios.forEach(function(v1,i1){
+					if (v.userId===v1.id){
+						v.username=v1.name;
+						v.email=v1.email;
+					}
+				});
+	
+					
+				});
+
+				//console.log(_data[0]['userId'])
 				console.log(usuarios[0]['id'])
 
-				console.log(typeof(_data))
+				//console.log(typeof(_data))
 				console.log(typeof(usuarios))
 
 

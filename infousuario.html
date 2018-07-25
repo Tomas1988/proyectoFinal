@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Api JavaScript</title>
+		<script src="resourses\scripts\jquery-3.2.1.min.js"></script>
+        <script src="userinfo.js"></script>
+        <script src="login-api.js"></script>
+		<link rel="stylesheet" href="resourses\css\bootstrap.min.css"></script>
+		<link rel="stylesheet" href="resourses\css\main.css"></script>
+		<style>
+			.bgimg {
+				background-image: url('./resourses/img/bgheader.jpg');
+			}
+			.hdimg {
+				background-image: url('./resourses/img/header.png');
+			}
+			
+		</style>
+	</head>
+	<body class="bgimg">
+		<div class="container">
+		  <div class="row">
+			<div class="col-md-8">
+			  
+			  <div class="row " style="margin-bottom: 5px;">
+				<div class="col-sm-10">
+					<h2 class="page-header titulo" align="center">Información Del Usuario</h2>
+				</div>
+				
+				<div class="col-sm-2">
+					<button type="button" class="btn btn-primary" id="logout">Logout</button>
+				</div>			
+			</div>
+			
+				<section class="comment-list" id="infoUsuario">
+				  <article class="row">
+					<div class="col-md-10 col-sm-10">
+					  <div class="panel panel-default arrow left">
+						<div class="panel-heading right hdimg"><h2><b><label id="nombre"></label></b></h2></div>
+						<div class="panel-body">
+						  <header class="text-left">
+							<div class="comment-user" ><span class="glyphicon glyphicon-user"></span><i class="fa fa-user"></i> <label style="color:#4390bc">Usuario :    </label> <label id="usuario"></label></div>
+							<div class="comment-user" ><span class="glyphicon glyphicon-envelope"></span><i class="fa fa-user"></i> <label style="color:#4390bc">E-Mail :    </label> <label id="correo"></label></div>
+							<div class="comment-user" ><span class="glyphicon glyphicon-earphone"></span><i class="fa fa-user"></i> <label style="color:#4390bc">Teléfono :  </label> <label id="telefono"></label></div>
+						
+						  </header>
+						</div>
+					  </div>
+					</div>
+				  </article>
+				</section>
+			</div>
+		  </div>
+		</div>
+	</body>
+</html>
